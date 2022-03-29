@@ -38,31 +38,19 @@ function make_model(inst::Instance)
 end
 
 function run(instance::Instance)
+    start = time()
     model = make_model(instance)
     set_silent(model)
     optimize!(model)
     if has_values(model)
-        return termination_status(model), objective_value(model)
+        return objective_value(model), solve_time(model)
     end
-    return termination_status(model), Inf
+
+
+    return Inf, time()-start
 end
 
-function heuristic(instance::Instance)
-    model = make_model(instance)
-    set_silent(model)
 
-    u = model[:u]
-    nb_nodes, nb_functions = size(u)
-    @constraint(model, [f = 1:nb_functions], sum(u[i, f] for i in 1:nb_nodes) ≤ 1)
-    # @constraint(model, [i=1:nb_nodes], sum(u[i,f] for f in 1:nb_functions) ≤ 1)
-
-    optimize!(model)
-    if has_values(model)
-        return termination_status(model), objective_value(model)
-    end
-    return termination_status(model), Inf
-end
 
 println(run(Instance("test")))
 println(run(Instance("pdh/pdh_1")))
-println(heuristic(Instance("pdh/pdh_1")))

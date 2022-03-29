@@ -124,7 +124,7 @@ mutable struct Instance
     costs #coût d'installation d'une fonction
 
     excl #fonctions incompatibles
-
+    
     function Instance(filename::String)
 
         graph, node_capacities, latencies, node_costs = parse_graph(filename)
