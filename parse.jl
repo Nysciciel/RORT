@@ -2,7 +2,7 @@
 filename = "test"
 
 function parse_graph(filename::String)
-    lines = readlines("instances/"*filename*"_graph.txt")
+    lines = readlines("instances/"*filename*"/graph.txt")
     nb_nodes = parse(Int64, lines[2][findlast("nb_nodes", lines[2])[end]+1:end])
     nb_arcs = parse(Int64, lines[3][findlast("nb_arcs", lines[3])[end]+1:end])
     node_capacities = zeros((nb_nodes))
@@ -30,7 +30,7 @@ nb_nodes = size(g)[1]
 
 
 function parse_commodity(filename::String)
-    lines = readlines("instances/"*filename*"_commodity.txt")
+    lines = readlines("instances/"*filename*"/commodity.txt")
     nb_commodities = parse(Int64, lines[2][findlast("nb_commodities", lines[2])[end]+1:end])
     
     departure_nodes = zeros(Int, (nb_commodities))
@@ -52,7 +52,7 @@ s, t, b, L = parse_commodity(filename)
 nb_commodities = length(s)
 
 function parse_fct_commod(filename::String, nb_commodities::Int64)
-    lines = readlines("instances/"*filename*"_fct_commod.txt")
+    lines = readlines("instances/"*filename*"/fct_commod.txt")
     
     max_f = max( [max(a...) for a in map.(x->parse(Int64,x), split.(lines))]...) + 1
 
@@ -76,7 +76,7 @@ C, max_c = parse_fct_commod(filename, nb_commodities)
 
 
 function parse_functions(filename::String, nb_nodes::Int64)
-    lines = readlines("instances/"*filename*"_functions.txt")
+    lines = readlines("instances/"*filename*"/functions.txt")
 
     nb_functions = parse(Int64, lines[2][findlast("nb_functions", lines[2])[end]+1:end])
 
@@ -97,7 +97,7 @@ nb_functions = length(Cf)
 
 
 function parse_affinity(filename::String, nb_commodities::Int64)
-    lines = readlines("instances/"*filename*"_affinity.txt")
+    lines = readlines("instances/"*filename*"/affinity.txt")
     exclusions = zeros(Int, (nb_commodities,2))
 
     for line_index in 1:length(lines)
