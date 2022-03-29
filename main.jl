@@ -63,5 +63,5 @@ function main(filename::String)
     println(termination_status(model))
 end
 
-main("grille2x3")
+main("pdh/pdh_1")
 
