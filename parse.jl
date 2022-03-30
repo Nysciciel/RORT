@@ -145,3 +145,11 @@ mutable struct Instance
             nb_functions, fct_commodities, max_layer, functions_capacities, costs, excl)
     end
 end
+
+function make_data(inst::Instance)
+    global inst_ = inst
+    for arg in fieldnames(Instance)
+        global arg_ = arg
+        eval(:($arg_ = getfield(inst_, $(:arg_))))
+    end
+end

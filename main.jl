@@ -5,13 +5,7 @@ include("parse.jl")
 function make_model(inst::Instance)
     model = Model(CPLEX.Optimizer)
 
-
-    global inst_ = inst
-    for arg in fieldnames(Instance)
-        global arg_ = arg
-        eval(:($arg_ = getfield(inst_, $(:arg_))))
-    end
-
+    make_data(inst)
 
     @variable(model, x[k=1:nb_commodities, i=1:nb_nodes, j=1:nb_nodes, c=1:(nb_functions+1)], Bin) # client k empreinte trajet i-j en couche c
     @variable(model, y[i=1:nb_nodes, f=1:nb_functions], Int) # nombre de fonctons f en i
