@@ -113,7 +113,7 @@ mutable struct Instance
     nb_commodities::Int64
     departure_nodes #noeud de départs
     arrival_nodes #noeud d'arrivée
-    flow #débits
+    floww #débits
     max_latency #latence max
 
     nb_functions::Int64
