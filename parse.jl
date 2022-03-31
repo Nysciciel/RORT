@@ -45,12 +45,10 @@ function parse_commodity(filename::String)
     return departure_nodes, arrival_nodes, flow, max_latency
 end
 
-function parse_fct_commod(filename::String, nb_commodities::Int64)
+function parse_fct_commod(filename::String, nb_commodities::Int64, nb_functions::Int64)
     lines = readlines("instances/" * filename * "/fct_commod.txt")
 
-    max_f = max([max(a...) for a in map.(x -> parse(Int64, x), split.(lines))]...) + 1
-
-    fct_commodities = falses((nb_commodities, max_f, max_f + 1))
+    fct_commodities = falses((nb_commodities, nb_functions, nb_functions + 1))
     max_layer = zeros(Int, (nb_commodities))
 
 
@@ -113,7 +111,7 @@ mutable struct Instance
     nb_commodities::Int64
     departure_nodes #noeud de départs
     arrival_nodes #noeud d'arrivée
-    flow #débits
+    floww #débits
     max_latency #latence max
 
     nb_functions::Int64
@@ -133,10 +131,10 @@ mutable struct Instance
         departure_nodes, arrival_nodes, flow, max_latency = parse_commodity(filename)
         nb_commodities = length(departure_nodes)
 
-        fct_commodities, max_layer = parse_fct_commod(filename, nb_commodities)
-
         functions_capacities, costs = parse_functions(filename, nb_nodes)
         nb_functions = length(functions_capacities)
+
+        fct_commodities, max_layer = parse_fct_commod(filename, nb_commodities, nb_functions)
 
         excl = parse_affinity(filename, nb_commodities)
 
