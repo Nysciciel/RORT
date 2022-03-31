@@ -98,4 +98,5 @@ end
 
 
 println(run_chemins(Instance("test")))
+println(run_chemins(Instance("grille2x3")))
 println(run_chemins(Instance("pdh/pdh_1")))

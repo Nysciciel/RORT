@@ -48,4 +48,5 @@ end
 
 
 println(run(Instance("test")))
+println(run(Instance("grille2x3")))
 println(run(Instance("pdh/pdh_1")))

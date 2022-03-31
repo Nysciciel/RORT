@@ -64,7 +64,6 @@ function parse_fct_commod(filename::String, nb_commodities::Int64, nb_functions:
     return fct_commodities, max_layer
 end
 
-
 function parse_functions(filename::String, nb_nodes::Int64)
     lines = readlines("instances/" * filename * "/functions.txt")
 
@@ -81,7 +80,6 @@ function parse_functions(filename::String, nb_nodes::Int64)
     end
     return functions_capacities, costs
 end
-
 
 function parse_affinity(filename::String, nb_commodities::Int64)
     lines = readlines("instances/" * filename * "/affinity.txt")
